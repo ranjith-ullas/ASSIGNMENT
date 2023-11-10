@@ -1,0 +1,75 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Currency Converter</h1>
+<div class="container">
+  <div class="input-group">
+    <label for="amount">Amount:</label>
+    <input id="amount" type="number" value="0" />
+  </div>
+  <div class="input-group">
+    <label for="source">From:</label>
+    <select id="source">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="INR">INR</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <label for="target">To:</label>
+    <select id="target">
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="INR">INR</option>
+    </select>
+  </div>
+  <div class="output-group">
+    <label for="result">Result:</label>
+    <span id="result">0</span>
+  </div>
+  <div class="button-group">
+    <button id="convert">Convert</button>
+  </div>
+</div>
+<script>
+  // Get the elements from the document
+  const amount = document.getElementById("amount");
+  const source = document.getElementById("source");
+  const target = document.getElementById("target");
+  const result = document.getElementById("result");
+  const convert = document.getElementById("convert");
+
+  // Define the exchange rates for each currency pair
+  const rates = {
+    "USD-USD": 1,
+    "USD-EUR": 0.85,
+    "USD-INR": 74.32,
+    "EUR-USD": 1.18,
+    "EUR-EUR": 1,
+    "EUR-INR": 87.42,
+    "INR-USD": 0.013,
+    "INR-EUR": 0.011,
+    "INR-INR": 1
+  };
+
+  // Define a function to convert the currency values
+  function convertCurrency() {
+    // Get the input values
+    let amountValue = parseFloat(amount.value);
+    let sourceValue = source.value;
+    let targetValue = target.value;
+
+    // Calculate the converted amount using the exchange rates
+    let rate = rates[sourceValue + "-" + targetValue];
+    let convertedAmount = amountValue * rate;
+
+    // Display the result with two decimal places
+    result.textContent = convertedAmount.toFixed(2);
+  }
+
+  // Add an event listener to the convert button
+  convert.addEventListener("click", convertCurrency);
+</script>
+</body>
+</html>
